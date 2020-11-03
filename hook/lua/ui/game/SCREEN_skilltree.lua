@@ -27,6 +27,7 @@ local AchievementShop = import('/lua/ui/game/SCREEN_shopachievements.lua')
 local MsgsFailure = import('/lua/ui/game/HUD_msgs_failure.lua').ShowFailureMsg
 local UserSync = import('/lua/UserSync.lua')
 local HeroUnit = import('/lua/sim/HeroUnit.lua').HeroUnit
+local Skill = import('/lua/sim/skill.lua')
 
 local overlay_have = '/skill_circleframe_have.dds'
 local overlay_canpick = '/skill_circleframe_glow.dds'
@@ -402,15 +403,13 @@ function Create(parent, inIsReplay)
     SkillTreeGUI.skillResetButton.icon:SetAlpha(0)
 
     function SkillTreeGUI.skillResetButton.OnClick(btn)
-        print("skillResetButton OnClick")
-        SPEW("OnClick")
-        SPEW(HeroUnit)
         if isReplay then
             return
         end
         
-        if SkillTreeButton.hero and HeroUnit and  not SkillTreeButton.hero:IsDead() then
-            HeroUnit:ResetSkillPoints()
+        if SkillTreeButton.hero and  not SkillTreeButton.hero:IsDead() then
+            print("Pushed a button")
+            Skill.removeAllSkills(SkillTreeButton.hero)
         end
     end
 
