@@ -409,7 +409,15 @@ function Create(parent, inIsReplay)
         
         if SkillTreeButton.hero and  not SkillTreeButton.hero:IsDead() then
             print("Pushed a button")
-            Skill.removeAllSkills(SkillTreeButton.hero)
+
+            local syncData = EntityData[SkillTreeButton.hero:GetEntityId()]
+
+            syncData.SkillPoints = 30
+            syncData.Skills = {}
+            SkillTreeGUI.tree.points = 30
+            SkillTreeGUI.tree.skills = {}
+
+            EntityData[SkillTreeButton.hero:GetEntityId()] = syncData
         end
     end
 
